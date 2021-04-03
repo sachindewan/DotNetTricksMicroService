@@ -1,0 +1,39 @@
+{
+  "Routes": [
+    {
+      "DownstreamPathTemplate": "/api/catalog",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 17501
+        }
+      ],
+      "Key": "catalogKey",
+      "UpstreamPathTemplate": "/catalogservice",
+      "UpstreamHttpMethod": [ "Get" ]
+    },
+    {
+      "DownstreamPathTemplate": "/api/authentication",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 64219
+        }
+      ],
+      "Key": "authKey",
+      "UpstreamPathTemplate": "/authenticationservice",
+      "UpstreamHttpMethod": [ "GET", "POST" ]
+    }
+  ],
+  "Aggregates": [
+    {
+      "RouteKeys": [
+        "catalogKey",
+        "authKey"
+      ],
+      "UpstreamPathTemplate": "/aggregate-result"
+    }
+  ]
+}
