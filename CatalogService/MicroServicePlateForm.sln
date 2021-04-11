@@ -3,9 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CatalogService", "CatalogService.csproj", "{D545E699-6F2F-42DA-9166-78F5C07D19D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CatalogService", "CatalogService.csproj", "{D545E699-6F2F-42DA-9166-78F5C07D19D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "APIGateWay", "..\APIGateWay\APIGateWay.csproj", "{0A781CE3-981A-4436-A561-154BD8E78D30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "APIGateWay", "..\APIGateWay\APIGateWay.csproj", "{0A781CE3-981A-4436-A561-154BD8E78D30}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthenticationService", "..\AuthenticationService\AuthenticationService.csproj", "{B934B186-B8A0-4001-BC07-43C04BB29742}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BasketService", "..\BasketService\BasketService.csproj", "{7BDC8796-1FEE-44F1-BD02-254678605D70}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderService", "..\OrderService\OrderService.csproj", "{CECA8A4B-A984-4656-BE05-A2FDEB34AC77}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SeviceBusMessaging", "..\SeviceBusMessaging\SeviceBusMessaging.csproj", "{9A1B7C96-64F3-4D89-A3C5-C924D942F3E8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +29,22 @@ Global
 		{0A781CE3-981A-4436-A561-154BD8E78D30}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0A781CE3-981A-4436-A561-154BD8E78D30}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0A781CE3-981A-4436-A561-154BD8E78D30}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B934B186-B8A0-4001-BC07-43C04BB29742}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B934B186-B8A0-4001-BC07-43C04BB29742}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B934B186-B8A0-4001-BC07-43C04BB29742}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B934B186-B8A0-4001-BC07-43C04BB29742}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7BDC8796-1FEE-44F1-BD02-254678605D70}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7BDC8796-1FEE-44F1-BD02-254678605D70}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7BDC8796-1FEE-44F1-BD02-254678605D70}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7BDC8796-1FEE-44F1-BD02-254678605D70}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CECA8A4B-A984-4656-BE05-A2FDEB34AC77}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CECA8A4B-A984-4656-BE05-A2FDEB34AC77}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CECA8A4B-A984-4656-BE05-A2FDEB34AC77}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CECA8A4B-A984-4656-BE05-A2FDEB34AC77}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A1B7C96-64F3-4D89-A3C5-C924D942F3E8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A1B7C96-64F3-4D89-A3C5-C924D942F3E8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A1B7C96-64F3-4D89-A3C5-C924D942F3E8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A1B7C96-64F3-4D89-A3C5-C924D942F3E8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

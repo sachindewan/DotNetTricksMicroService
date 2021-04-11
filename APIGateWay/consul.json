@@ -45,5 +45,12 @@
       ],
       "UpstreamPathTemplate": "/aggregate-result"
     }
-  ]
+  ],
+  "GlobalConfiguration": {
+    "ServiceDiscoveryProvider": {
+      "Host": "localhost",
+      "Port": 8500,
+      "Type": "Consul"
+    }
+  }
 }

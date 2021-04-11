@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace APIGateWay
+namespace AuthenticationService
 {
     public class Program
     {
@@ -21,14 +21,6 @@ namespace APIGateWay
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                }).ConfigureAppConfiguration((hostingContext, config) =>
-                {
-                    config
-                        .SetBasePath(hostingContext.HostingEnvironment.ContentRootPath)
-                        .AddJsonFile("ocelot.json")
-
-                        .AddEnvironmentVariables();
-                    //.config.AddJsonFile("consul.json");
                 });
     }
 }

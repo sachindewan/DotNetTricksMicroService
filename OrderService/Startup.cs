@@ -1,4 +1,3 @@
-using CatalogService.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -8,12 +7,16 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using OrderService.Database;
+using SeviceBusMessaging;
+using SeviceBusMessaging.Implementations;
+using SeviceBusMessaging.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CatalogService
+namespace OrderService
 {
     public class Startup
     {
@@ -27,16 +30,19 @@ namespace CatalogService
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
-            services.AddControllers();
-            services.AddConsulConfig(Configuration);
+            string strCon = Configuration.GetConnectionString("DefaultConnection");
             services.AddDbContext<DatabaseContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("CatalogConectionString"));
+                options.UseSqlServer(strCon);
             });
+
+            services.AddSingleton<IServiceBusConsumer, ServiceBusConsumer>();
+            services.AddSingleton<IProcessData, ProcessData>();
+
+            services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatalogService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OrderService", Version = "v1" });
             });
         }
 
@@ -47,9 +53,9 @@ namespace CatalogService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CatalogService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "OrderService v1"));
             }
-            app.UseConsul(Configuration);
+
             app.UseRouting();
 
             app.UseAuthorization();
@@ -58,6 +64,10 @@ namespace CatalogService
             {
                 endpoints.MapControllers();
             });
+
+            //handler
+            var bus = app.ApplicationServices.GetService<IServiceBusConsumer>();
+            bus.RegisterOnMessageHandlerAndReceiveMessages();
         }
     }
 }

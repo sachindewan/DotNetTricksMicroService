@@ -1,4 +1,4 @@
-using CatalogService.Database;
+using AuthenticationService.DataBase;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CatalogService
+namespace AuthenticationService
 {
     public class Startup
     {
@@ -30,13 +30,13 @@ namespace CatalogService
 
             services.AddControllers();
             services.AddConsulConfig(Configuration);
-            services.AddDbContext<DatabaseContext>(options =>
+            services.AddDbContext<AuthentiCationDbContext>(options =>
             {
-                options.UseSqlServer(Configuration.GetConnectionString("CatalogConectionString"));
+                options.UseSqlServer(Configuration.GetConnectionString("AuthConectionString"));
             });
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatalogService", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "AuthenticationService", Version = "v1" });
             });
         }
 
@@ -47,7 +47,7 @@ namespace CatalogService
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CatalogService v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "AuthenticationService v1"));
             }
             app.UseConsul(Configuration);
             app.UseRouting();
