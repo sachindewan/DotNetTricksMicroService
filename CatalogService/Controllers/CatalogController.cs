@@ -1,4 +1,6 @@
-﻿using CatalogService.Database;
+﻿using CatalogService.CQRS.Command;
+using CatalogService.CQRS.Query;
+using CatalogService.Database;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -12,16 +14,54 @@ namespace CatalogService.Controllers
     [ApiController]
     public class CatalogController : ControllerBase
     {
-        private readonly DatabaseContext databaseContext;
-        public CatalogController(DatabaseContext _databaseContext)
+        private readonly ICommand command;
+
+        public CatalogController(ICommand command, IQueryService queryService)
         {
-            databaseContext = _databaseContext;
+            this.command = command;
+            _QueryService = queryService;
         }
 
-        [HttpGet]
-        public IEnumerable<Product> GetProducts()
+        public IQueryService _QueryService { get; }
+
+
+        [HttpGet("products/{id}")]
+        public async Task<IActionResult> GetProducts(int id)
         {
-            return databaseContext.Products.ToList();
+            try
+            {
+                return Ok(await _QueryService.GetProductById(id));
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,ex.Message);
+            }
+        }
+
+        [HttpGet("products")]
+        public async Task<IActionResult> GetProducts()
+        {
+            try
+            {
+                return Ok(await _QueryService.GetProducts());
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,ex.Message);
+            }
+        }
+        [HttpPost]
+        public async Task<IActionResult> AddProductAsync([FromBody] Product product)
+        {
+            try
+            {
+                await command.AddProduct(product);
+                return Ok();
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
         }
     }
 }

@@ -1,3 +1,5 @@
+using CatalogService.CQRS.Command;
+using CatalogService.CQRS.Query;
 using CatalogService.Database;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -38,6 +40,8 @@ namespace CatalogService
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CatalogService", Version = "v1" });
             });
+            services.AddScoped<ICommand, Command>();
+            services.AddScoped<IQueryService, Queryservice>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
